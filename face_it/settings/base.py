@@ -15,17 +15,21 @@ PIPELINE_ENABLED = True
 ADMINS = (
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'face_it',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',  # Set to empty string for localhost.
-        'PORT': '',  # Set to empty string for default.
-        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
-    }
-}
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'face_it',
+#        'USER': 'postgres',
+#        'PASSWORD': '',
+#        'HOST': '',  # Set to empty string for localhost.
+#        'PORT': '',  # Set to empty string for default.
+#        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
+#    }
+#}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -84,6 +88,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 # List of finder classes that know how to find static files in
